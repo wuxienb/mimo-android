@@ -8,13 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download
+      - name: Download mimo
         run: |
           curl -L -o /tmp/mimo.tar.gz https://github.com/XiaomiMiMo/MiMo-Code/releases/latest/download/mimocode-linux-arm64.tar.gz
-          mkdir -p /tmp/ext
-          tar xzf /tmp/mimo.tar.gz -C /tmp/ext --strip-components=1
-          cp /tmp/ext/mimo app/src/main/assets/mimocode
-          ls -lh app/src/main/assets/mimocode
+          tar xzf /tmp/mimo.tar.gz -C app/src/main/assets --strip-components=1
+          ls -lh app/src/main/assets/mimo
       - name: SDK
         uses: android-actions/setup-android@v3
       - name: Build
