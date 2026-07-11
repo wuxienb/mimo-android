@@ -1,0 +1,35 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 下载 MiMoCode 二进制
+        run: |
+          curl -L -o app/src/main/assets/mimocode \
+            https://github.com/XiaomiMiMo/MiMo-Code/releases/latest/download/mimocode-linux-arm64
+
+      - name: 设置 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 设置 Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 构建 APK
+        run: ./gradlew assembleRelease
+
+      - name: 上传 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MiMoCode-APK
+          path: app/build/outputs/apk/release/*.apk
