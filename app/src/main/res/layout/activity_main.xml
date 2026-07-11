@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
 
-    <!-- 状态栏 -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/status_bar"
         android:layout_width="0dp"
@@ -20,7 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="?attr/colorPrimaryContainer" />
 
-    <!-- 聊天列表 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_chat"
         android:layout_width="0dp"
@@ -34,10 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:overScrollMode="never" />
 
-
-    <!-- 底栏 -->
-    android:id="@+id/bottom_bar"
     <LinearLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
