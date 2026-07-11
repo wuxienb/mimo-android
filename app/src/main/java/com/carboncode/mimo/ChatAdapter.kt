@@ -43,7 +43,7 @@ class ChatAdapter : ListAdapter<ChatMessage, ChatAdapter.ViewHolder>(DiffCallbac
             } else {
                 textView.apply {
                     setBackgroundResource(R.drawable.bg_message_ai)
-                    setTextColor(textView.context.getColor(android.R.color.secondary_text_material_dark))
+                    setTextColor(textView.context.getColor(android.R.color.black))
                 }
                 (textView.layoutParams as ViewGroup.MarginLayoutParams).marginStart =
                     (24 * textView.context.resources.displayMetrics.density).toInt()
