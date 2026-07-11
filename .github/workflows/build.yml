@@ -1,17 +1,17 @@
 name: Build APK
 on:
-  push:
-    branches: [ main ]
+  push: { branches: [ main ] }
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download mimo
+      - name: Download
         run: |
-          curl -L -o /tmp/mimo.tar.gz https://github.com/XiaomiMiMo/MiMo-Code/releases/latest/download/mimocode-linux-arm64.tar.gz
-          tar xzf /tmp/mimo.tar.gz -C app/src/main/assets --strip-components=1
+          mkdir -p app/src/main/assets
+          curl -sL -o /tmp/mimo.tgz https://github.com/XiaomiMiMo/MiMo-Code/releases/latest/download/mimocode-linux-arm64.tar.gz
+          tar xzf /tmp/mimo.tgz -C app/src/main/assets --strip-components=1
           ls -lh app/src/main/assets/mimo
       - name: SDK
         uses: android-actions/setup-android@v3
@@ -19,6 +19,4 @@ jobs:
         run: ./gradlew assembleDebug
       - name: Upload
         uses: actions/upload-artifact@v4
-        with:
-          name: MiMoCode-APK
-          path: app/build/outputs/apk/debug/*.apk
+        with: { name: MiMoCode-APK, path: app/build/outputs/apk/debug/*.apk }
